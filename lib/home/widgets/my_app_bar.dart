@@ -13,8 +13,7 @@ class MyAppBar extends StatelessWidget {
             height: 100,
             child: Row(
               children: <Widget>[
-                Image.network(
-                    'https://drive.google.com/file/d/1Uqo4R0aOeHImOirhMFYWDSD99VAqLwg3/view?usp=sharing'),
+                Image.asset('assets/images/logo.png'),
                 SizedBox(
                   width: 10,
                 ),

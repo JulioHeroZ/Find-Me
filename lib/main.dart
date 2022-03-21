@@ -10,9 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Nubank',
+      title: 'Find Me',
       theme: ThemeData(
-        primarySwatch: Colors.purple,
+        primaryColor: Color.fromARGB(255, 255, 255, 255),
       ),
       home: HomePage(),
     );
