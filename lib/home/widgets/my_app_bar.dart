@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nubankproject/home/home_page.dart';
 
 class MyAppBar extends StatelessWidget {
   @override
@@ -8,7 +9,7 @@ class MyAppBar extends StatelessWidget {
           appBar: AppBar(
             title: Image.asset(
               "assets/images/logo.png",
-              height: 200,
+              height: 150,
               width: 200,
             ),
             centerTitle: true,
@@ -38,6 +39,13 @@ class MyAppBar extends StatelessWidget {
             titleSpacing: 20,
           ),
           body: Container(),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: Colors.amberAccent,
+            child: const Icon(Icons.search),
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
         ),
       );
 }
