@@ -37,7 +37,6 @@ class MyAppBar extends StatelessWidget {
                 Tab(icon: Icon(Icons.settings), text: "Config."),
               ],
             ),
-            elevation: 20,
             titleSpacing: 20,
           ),
           body: TabBarView(children: [
