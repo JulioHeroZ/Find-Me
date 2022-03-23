@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nubankproject/Login/login.dart';
+import 'package:nubankproject/Settings/Settings.dart';
 import 'package:nubankproject/home/home_page.dart';
 
 class MyAppBar extends StatelessWidget {
@@ -14,7 +16,7 @@ class MyAppBar extends StatelessWidget {
             ),
             centerTitle: true,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     Color.fromARGB(255, 214, 166, 6),
@@ -38,14 +40,11 @@ class MyAppBar extends StatelessWidget {
             elevation: 20,
             titleSpacing: 20,
           ),
-          body: Container(),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: Colors.amberAccent,
-            child: const Icon(Icons.search),
-          ),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerFloat,
+          body: TabBarView(children: [
+            HomePage(),
+            Login(),
+            Settings(),
+          ]),
         ),
       );
 }
