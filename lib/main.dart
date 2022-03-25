@@ -1,11 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:nubankproject/Login/login.dart';
-import 'package:nubankproject/Settings/Settings.dart';
-import 'package:nubankproject/home/home_page.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 
-void main() {
-  runApp(MyApp());
+
+void main() async {
+
+  await Firebase.initializeApp();
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider
+
+      ],
+
+  
+  child: MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
