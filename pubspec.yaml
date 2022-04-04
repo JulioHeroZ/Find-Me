@@ -33,7 +33,17 @@ dependencies:
   firebase_core: ^1.13.1
   flutter:
     sdk: flutter
-
+  provider:
+  http:
+  hive:
+  path_provider: ^2.0.9
+  intl: ^0.17.0
+  shared_preferences: ^2.0.13
+  hive_flutter: ^1.1.0
+  fl_chart: ^0.50.1
+  sqflite: ^2.0.2
+  firebase_database: ^9.0.9
+  firebase_database_web: ^0.2.0+8
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
