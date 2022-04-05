@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nubankproject/services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'package:nubankproject/Login/login.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({Key? key}) : super(key: key);
