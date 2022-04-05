@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "158170322281",
+    "firebase_url": "https://find-me-cf925-default-rtdb.firebaseio.com",
+    "project_id": "find-me-cf925",
+    "storage_bucket": "find-me-cf925.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:158170322281:android:639f7a060ece9bdcdb99f8",
+        "android_client_info": {
+          "package_name": "com.findme.findmeproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "158170322281-g36mvkqo9tu7v7fn4tpt4r0r134bj1me.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYF0dMVYbdxaUMaAdQ9OfnZ9OVUAhbjnU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "158170322281-g36mvkqo9tu7v7fn4tpt4r0r134bj1me.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "158170322281-ak5n70iv2q16nl7mq9dr62kahbllj483.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.findme.findmeproject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
