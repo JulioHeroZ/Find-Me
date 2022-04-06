@@ -4,6 +4,7 @@ import 'package:nubankproject/services/auth_service.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nubankproject/firebase_options.dart';
+import 'constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: kDarkTheme,
       title: 'Find Me',
       home: MyAppBar(),
     );

@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:nubankproject/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
@@ -73,9 +72,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(color: Color.fromARGB(255, 0, 0, 0)),
-          ),
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.only(top: 100),
@@ -99,8 +95,6 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextFormField(
                         controller: email,
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
                           border: OutlineInputBorder(),
                           labelText: 'Email',
                         ),
@@ -121,8 +115,6 @@ class _LoginPageState extends State<LoginPage> {
                         controller: senha,
                         obscureText: true,
                         decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
                           border: OutlineInputBorder(),
                           labelText: 'Senha',
                         ),

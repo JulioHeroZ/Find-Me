@@ -47,7 +47,7 @@ class MyAppBar extends StatelessWidget {
           body: TabBarView(children: [
             HomePage(),
             AuthCheck(),
-            Settings(),
+            SettingsPage(),
           ]),
         ),
       );
