@@ -12,11 +12,15 @@ Future<void> _signOut() async {
   await FirebaseAuth.instance.signOut();
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-
+    final user = FirebaseAuth.instance.currentUser!;
     var profileInfo = Expanded(
       child: Column(
         children: <Widget>[
@@ -56,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(height: kSpacingUnit.w * 2),
           SizedBox(height: kSpacingUnit.w * 0.5),
           Text(
-            'juliohero64@gmail.com',
+            user.email!,
             style: kTitleTextStyle,
           ),
         ],
