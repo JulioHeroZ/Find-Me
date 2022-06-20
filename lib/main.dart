@@ -1,5 +1,7 @@
+import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nubankproject/services/auth_service.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +28,21 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: kDarkTheme,
-      title: 'Find Me',
-      home: MyAppBar(),
+    return ThemeProvider(
+      initTheme: kDarkTheme,
+      child: Builder(
+        builder: (context) {
+          return ScreenUtilInit(
+            designSize: const Size(400, 360),
+            builder: () => MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: kDarkTheme,
+              title: 'Find Me',
+              home: MyAppBar(),
+            ),
+          );
+        },
+      ),
     );
   }
 }

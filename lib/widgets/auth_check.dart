@@ -26,7 +26,7 @@ class _AuthCheckState extends State<AuthCheck> {
       return LoginPage();
     else
       // ignore: curly_braces_in_flow_control_structures
-      return UserPage();
+      return ProfileScreen();
   }
 
   loading() {

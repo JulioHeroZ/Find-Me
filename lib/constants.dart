@@ -14,12 +14,24 @@ final kTitleTextStyle = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+final kCaptionTextStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.3),
+  fontWeight: FontWeight.w100,
+);
+
+final kButtonTextStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
+  fontWeight: FontWeight.w400,
+  color: kDarkPrimaryColor,
+);
+
 final kDarkTheme = ThemeData(
   brightness: Brightness.dark,
   fontFamily: 'SFProText',
   primaryColor: kDarkPrimaryColor,
   canvasColor: kDarkPrimaryColor,
   backgroundColor: kDarkSecondaryColor,
+  accentColor: kAccentColor,
   iconTheme: ThemeData.dark().iconTheme.copyWith(
         color: kLightSecondaryColor,
       ),
@@ -36,6 +48,7 @@ final kLightTheme = ThemeData(
   primaryColor: kLightPrimaryColor,
   canvasColor: kLightPrimaryColor,
   backgroundColor: kLightSecondaryColor,
+  accentColor: kAccentColor,
   iconTheme: ThemeData.light().iconTheme.copyWith(
         color: kDarkSecondaryColor,
       ),

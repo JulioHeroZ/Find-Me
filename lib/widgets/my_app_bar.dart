@@ -39,7 +39,7 @@ class MyAppBar extends StatelessWidget {
               tabs: [
                 Tab(icon: Icon(Icons.home), text: "Home"),
                 Tab(icon: Icon(Icons.face), text: "Login"),
-                Tab(icon: Icon(Icons.settings), text: "Config."),
+                Tab(icon: Icon(Icons.cloud), text: "Saiba Mais"),
               ],
             ),
             titleSpacing: 20,
