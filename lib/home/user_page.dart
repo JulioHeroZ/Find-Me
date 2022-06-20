@@ -15,6 +15,8 @@ Future<void> _signOut() async {
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     var profileInfo = Expanded(
       child: Column(
         children: <Widget>[
@@ -79,11 +81,23 @@ class ProfileScreen extends StatelessWidget {
                         icon: LineAwesomeIcons.cog,
                         text: 'Configurações',
                       ),
-                      ProfileListItem(
-                        icon: LineAwesomeIcons.alternate_sign_out,
-                        text: 'Logout',
-                        hasNavigation: false,
-                      ),
+                      Container(
+                        margin: const EdgeInsets.all(40.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _signOut();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              fixedSize: const Size(0, 50),
+                              primary: kAccentColor,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30))),
+                          child: Text(
+                            "Sair",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 )
