@@ -48,6 +48,17 @@ dependencies:
   line_awesome_flutter: ^2.0.0
   animated_theme_switcher: ^2.0.6
   flutter_screenutil: ^5.3.1
+  lottie:
+  dartz:
+  google_maps_flutter:
+  fab_circular_menu:
+  flutter_polyline_points:
+  flutter_rating_stars:
+  flip_card:
+  geolocator: ^8.2.1
+  location: ^4.4.0
+
+
   
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -68,6 +79,8 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/images/avatar.png
+    - assets/animassets/mapanimation.json
+    - assets/mapicons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -80,15 +93,28 @@ flutter:
   fonts:
     - family: SFProText
       fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Italic.ttf
+          style: italic
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-Light.ttf
+          weight: 200
+        - asset: assets/fonts/WorkSans-Thin.ttf
+          weight: 300
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 400
+        - asset: assets/fonts/WorkSans-ExtraLight.ttf
+          weight: 100
         - asset: assets/fonts/SF-Pro-Text-Thin.ttf
           weight: 100
-
         - asset: assets/fonts/SF-Pro-Text-Regular.ttf
-          weight: 400
 
+          weight: 400
         - asset: assets/fonts/SF-Pro-Text-Medium.ttf
           weight: 500
-
         - asset: assets/fonts/SF-Pro-Text-Bold.ttf
           weight: 600
     
