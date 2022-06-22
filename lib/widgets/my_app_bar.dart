@@ -3,52 +3,50 @@
 import 'package:flutter/material.dart';
 import 'package:nubankproject/Settings/settings.dart';
 import 'package:nubankproject/home/home_page.dart';
-import 'package:nubankproject/widgets/auth_check.dart';
+
+import '../home/user_page.dart';
 
 // ignore: use_key_in_widget_constructors
-class MyAppBar extends StatelessWidget {
+class MyAppBar extends StatefulWidget {
   @override
-  Widget build(BuildContext context) => DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          // ignore: duplicate_ignore
-          appBar: AppBar(
-            title: Image.asset(
-              "assets/images/logo.png",
-              height: 150,
-              width: 200,
-            ),
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color.fromARGB(255, 214, 166, 6),
-                    Color.fromARGB(255, 226, 122, 4)
-                  ],
-                  begin: Alignment.bottomRight,
-                  end: Alignment.topLeft,
-                ),
-              ),
-            ),
-            // ignore: prefer_const_constructors
-            bottom: TabBar(
-              isScrollable: true,
-              indicatorColor: Colors.white,
-              indicatorWeight: 5,
-              tabs: [
-                Tab(icon: Icon(Icons.face), text: "Profile"),
-                Tab(icon: Icon(Icons.map), text: "Map"),
-                Tab(icon: Icon(Icons.cloud), text: "Saiba Mais"),
-              ],
-            ),
-            titleSpacing: 20,
-          ),
-          body: TabBarView(children: [
-            AuthCheck(),
-            HomePage(),
-            SettingsPage(),
-          ]),
+  State<MyAppBar> createState() => _MyAppBarState();
+}
+
+class _MyAppBarState extends State<MyAppBar> {
+  final screens = [ProfileScreen(), HomePage(), SettingsPage()];
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) => Scaffold(
+      // ignore: duplicate_ignore
+      appBar: AppBar(
+        title: Image.asset(
+          "assets/images/logo.png",
+          height: 150,
+          width: 200,
         ),
-      );
+        centerTitle: true,
+      ),
+      body: IndexedStack(index: currentIndex, children: screens),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: currentIndex,
+        onTap: (index) => setState(() => currentIndex = index),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.face),
+            label: 'Profile',
+            backgroundColor: Colors.red,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: 'Mapa',
+            backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.cloud),
+            label: 'Saiba Mais',
+            backgroundColor: Colors.purple,
+          ),
+        ],
+      ));
 }

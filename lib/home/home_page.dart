@@ -61,20 +61,18 @@ class _HomePageState extends State<HomePage> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(children: [
-          Container(
-            height: screenHeight,
-            width: screenWidht,
-            child: GoogleMap(
-              mapType: MapType.normal,
-              initialCameraPosition: _kGooglePlex,
-              onMapCreated: (GoogleMapController controller) {
-                googleMapController = controller;
-              },
-            ),
-          )
-        ]),
+      body: Container(
+        height: screenHeight,
+        width: screenWidht,
+        child: GoogleMap(
+          myLocationEnabled: true,
+          mapType: MapType.normal,
+          zoomControlsEnabled: true,
+          initialCameraPosition: _kGooglePlex,
+          onMapCreated: (GoogleMapController controller) {
+            googleMapController = controller;
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -82,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           googleMapController.animateCamera(CameraUpdate.newCameraPosition(
               CameraPosition(
                   target: LatLng(position.latitude, position.longitude),
-                  zoom: 14)));
+                  zoom: 18)));
           markers.clear();
           markers.add(Marker(
               markerId: const MarkerId('currentLocation'),

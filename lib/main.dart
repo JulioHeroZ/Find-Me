@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nubankproject/Login/login.dart';
 import 'package:nubankproject/services/auth_service.dart';
+import 'package:nubankproject/widgets/auth_check.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nubankproject/firebase_options.dart';
@@ -39,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 5)).then((value) => Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (context) => MyAppBar())));
+        .pushReplacement(MaterialPageRoute(builder: (context) => AuthCheck())));
   }
 
   @override
