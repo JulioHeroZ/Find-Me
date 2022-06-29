@@ -57,6 +57,7 @@ dependencies:
   flip_card:
   geolocator: ^8.2.1
   location: ^4.4.0
+  get: ^4.6.5
 
 
   
