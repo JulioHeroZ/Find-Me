@@ -56,7 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
   }
 }
-
 // ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override

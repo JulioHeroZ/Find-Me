@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import '../RegisterStore/registration_screen.dart';
 import '../constants.dart';
 import '../widgets/profile_list_item.dart';
 
@@ -63,6 +64,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             user.email!,
             style: kTitleTextStyle,
           ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => RegistrationScreen()));
+              },
+              style: ElevatedButton.styleFrom(
+                  fixedSize: const Size(500, 50),
+                  primary: kAccentColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30))),
+              child: Text(
+                "Possui uma loja? Cadastre-se aqui!",
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          )
         ],
       ),
     );

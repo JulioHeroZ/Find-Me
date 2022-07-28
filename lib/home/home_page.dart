@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   Completer<GoogleMapController> _controller = Completer();
   LocationData? _currentPosition;
   LatLng? _latLong;
