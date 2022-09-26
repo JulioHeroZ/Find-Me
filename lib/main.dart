@@ -12,12 +12,15 @@ import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nubankproject/firebase_options.dart';
 import 'constants.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(
     MultiProvider(
@@ -56,19 +59,20 @@ class _SplashScreenState extends State<SplashScreen> {
     ));
   }
 }
+
 // ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ThemeProvider(
-      initTheme: kDarkTheme,
+      initTheme: kLightTheme,
       child: Builder(
         builder: (context) {
           return ScreenUtilInit(
             designSize: const Size(400, 360),
             builder: () => MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: kDarkTheme,
+              theme: kLightTheme,
               title: 'Find Me',
               home: SplashScreen(),
             ),
