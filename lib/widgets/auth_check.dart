@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:nubankproject/Login/login.dart';
-import 'package:nubankproject/home/user_page.dart';
+import 'package:nubankproject/RegisterStore/landing_screen.dart';
 import 'package:nubankproject/services/auth_service.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
+
+import '../RegisterStore/registration_screen.dart';
 
 class AuthCheck extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
@@ -27,7 +29,7 @@ class _AuthCheckState extends State<AuthCheck> {
       return LoginPage();
     else
       // ignore: curly_braces_in_flow_control_structures
-      return MyAppBar();
+      return LandingScreen();
   }
 
   loading() {
