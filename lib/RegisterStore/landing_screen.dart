@@ -46,6 +46,20 @@ class LandingScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Container(
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4),
+                        child: CachedNetworkImage(
+                          imageUrl: vendedor.logo!,
+                          placeholder: ((context, url) => Container(
+                                height: 80,
+                                width: 80,
+                                color: Colors.grey.shade300,
+                              )),
+                        ))),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   vendedor.businessName!,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),

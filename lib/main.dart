@@ -1,11 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nubankproject/provider/product_provider.dart';
 import 'package:nubankproject/services/auth_service.dart';
-import 'package:nubankproject/widgets/auth_check.dart';
 import 'package:nubankproject/widgets/my_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:nubankproject/firebase_options.dart';
@@ -13,6 +15,7 @@ import 'constants.dart';
 import 'package:flutter/services.dart';
 
 void main() async {
+  Provider.debugCheckInvalidValueType = null;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -23,7 +26,12 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthService()),
+        ChangeNotifierProvider(
+          create: (context) => AuthService(),
+        ),
+        Provider<ProductProvider>(
+          create: (context) => ProductProvider(),
+        )
       ],
       child: MyApp(),
     ),
@@ -68,7 +76,7 @@ class MyApp extends StatelessWidget {
         builder: (context) {
           return ScreenUtilInit(
             designSize: const Size(400, 360),
-            builder: () => MaterialApp(
+            builder: (BuildContext context, child) => MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: kLightTheme,
               title: 'Find Me',

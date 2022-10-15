@@ -8,6 +8,8 @@ class FirebaseServices {
   User? user = FirebaseAuth.instance.currentUser;
   final CollectionReference vendedor =
       FirebaseFirestore.instance.collection('vendedor');
+  final CollectionReference categorias =
+      FirebaseFirestore.instance.collection('categorias');
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 

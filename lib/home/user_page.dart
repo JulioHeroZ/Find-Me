@@ -27,31 +27,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Column(
         children: <Widget>[
           Container(
-            height: kSpacingUnit.w * 10,
-            width: kSpacingUnit.w * 10,
-            margin: EdgeInsets.only(top: kSpacingUnit.w * 3),
+            height: 100,
+            width: 100,
+            margin: EdgeInsets.only(top: 10 * 3),
             child: Stack(
               children: <Widget>[
                 CircleAvatar(
-                  radius: kSpacingUnit.w * 5,
+                  radius: 10 * 5,
                   backgroundImage: AssetImage('assets/images/avatar.png'),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Container(
-                    height: kSpacingUnit.w * 2.5,
-                    width: kSpacingUnit.w * 2.5,
+                    height: 10 * 2.5,
+                    width: 10 * 2.5,
                     decoration: BoxDecoration(
                       color: Theme.of(context).accentColor,
                       shape: BoxShape.circle,
                     ),
                     child: Center(
-                      heightFactor: kSpacingUnit.w * 1.5,
-                      widthFactor: kSpacingUnit.w * 1.5,
+                      heightFactor: 10 * 1.5,
+                      widthFactor: 10 * 1.5,
                       child: Icon(
                         LineAwesomeIcons.pen,
                         color: kDarkPrimaryColor,
-                        size: ScreenUtil().setSp(kSpacingUnit.w * 1.5),
+                        size: 10 * 1.5,
                       ),
                     ),
                   ),
@@ -59,8 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
-          SizedBox(height: kSpacingUnit.w * 2),
-          SizedBox(height: kSpacingUnit.w * 0.5),
+          SizedBox(height: 10 * 2),
+          SizedBox(height: 10 * 0.5),
           // Text(
           //   user.email!,
           //   style: kTitleTextStyle,
@@ -107,20 +107,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       Container(
                         margin: const EdgeInsets.all(40.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            _signOut();
-                          },
-                          style: ElevatedButton.styleFrom(
-                              fixedSize: const Size(0, 50),
-                              primary: kAccentColor,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30))),
-                          child: Text(
-                            "Sair",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                        child: user == null
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AuthCheck()));
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(0, 50),
+                                    primary: kAccentColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30))),
+                                child: Text(
+                                  "Entrar",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              )
+                            : ElevatedButton(
+                                onPressed: () async {
+                                  _signOut();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    fixedSize: const Size(0, 50),
+                                    primary: kAccentColor,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(30))),
+                                child: Text(
+                                  "Sair",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ),
                       )
                     ],
                   ),
