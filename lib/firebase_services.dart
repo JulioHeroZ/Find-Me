@@ -10,6 +10,9 @@ class FirebaseServices {
       FirebaseFirestore.instance.collection('vendedor');
   final CollectionReference categorias =
       FirebaseFirestore.instance.collection('categorias');
+  final CollectionReference produtos =
+      FirebaseFirestore.instance.collection('produtos');
+
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -29,5 +32,13 @@ class FirebaseServices {
         .set(data)
         .then((value) => print("Vendedor adicionado"))
         .catchError((error) => print("Adicionar vendedor falhou: $error"));
+  }
+
+  Future<void> addProduct({Map<String, dynamic>? data}) {
+    return produtos
+        .doc()
+        .set(data)
+        .then((value) => print("Produto Adicionado"))
+        .catchError((error) => print("Adicionar produto falhou: $error"));
   }
 }

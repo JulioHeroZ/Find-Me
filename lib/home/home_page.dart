@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -13,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   Completer<GoogleMapController> _controller = Completer();
   LocationData? _currentPosition;
   LatLng? _latLong;
@@ -78,6 +79,27 @@ class _HomePageState extends State<HomePage> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(255, 204, 150, 3),
+        automaticallyImplyLeading: false,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: 'Procurar',
+                  prefixIcon: Icon(Icons.search_outlined),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Colors.white),
+            ),
+          ),
+        ),
+      ),
       body: Container(
         height: screenHeight,
         width: screenWidht,

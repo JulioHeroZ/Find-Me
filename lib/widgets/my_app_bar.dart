@@ -17,8 +17,12 @@ class _MyAppBarState extends State<MyAppBar> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) => Scaffold(
+
       // ignore: duplicate_ignore
       appBar: AppBar(
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        backgroundColor: Color.fromARGB(255, 204, 150, 3),
         title: Image.asset(
           "assets/images/logo.png",
           height: 150,

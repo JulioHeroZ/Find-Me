@@ -77,17 +77,6 @@ class _ProductRegisterState extends State<ProductRegister> {
                 child: Text('Imagens'),
               )
             ]),
-            persistentFooterButtons: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                    onPressed: () {
-                      print(_provider.productData!['productName']);
-                      print(_provider.productData!['regularPrice']);
-                    },
-                    child: Text('Salvar')),
-              )
-            ],
           ),
         ));
   }
