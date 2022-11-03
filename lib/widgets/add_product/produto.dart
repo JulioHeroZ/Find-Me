@@ -24,7 +24,10 @@ class _ProductTabState extends State<ProductTab> {
   _saveToDB() {
     EasyLoading.show(status: 'Por favor aguarde...');
 
-    _services.uploadImage(_productImage, 'produtos/').then((String? url) {
+    _services
+        .uploadImage(_productImage,
+            'produtos/${_services.user!.uid}/${_productName.text}')
+        .then((String? url) {
       if (url != null) {
         setState(() {
           _productImageUrl = url;

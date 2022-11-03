@@ -2,8 +2,10 @@
 
 import 'dart:io';
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:nubankproject/RegisterStore/landing_screen.dart';
 import 'package:nubankproject/firebase_services.dart';
@@ -59,7 +61,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           'pais': _pais,
           'aprovado': false,
           'uid': _services.user!.uid,
-          'time': DateTime.now()
+          'time': DateTime.now(),
+          'location': GeoPoint(double.parse('$_lat'), double.parse('$_long'))
         });
       }).then(((value) {
         EasyLoading.dismiss();

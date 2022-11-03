@@ -1,10 +1,14 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:nubankproject/firebase_services.dart';
+import 'package:nubankproject/model/product_model.dart';
+import 'package:nubankproject/model/vendor_model.dart';
+import 'package:search_page/search_page.dart';
 
 @override
 class HomePage extends StatefulWidget {
@@ -15,10 +19,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Produto> _productList = [];
+
+  final FirebaseServices _services = FirebaseServices();
+  late GoogleMapController mapController;
+  Set<Marker> _markers = Set<Marker>();
+
   Completer<GoogleMapController> _controller = Completer();
   LocationData? _currentPosition;
+  var clients = [];
   LatLng? _latLong;
   bool _locating = false;
+
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -28,7 +41,32 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _getUserLocation();
+    getMarkerData();
     super.initState();
+  }
+
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+  getMarkerData() {
+    _services.vendedor.get().then((QuerySnapshot querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        initMarker(doc.data(), doc.id);
+      });
+    });
+  }
+
+  void initMarker(specify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+    final Marker marker = Marker(
+      markerId: markerId,
+      position:
+          LatLng(specify['location'].latitude, specify['location'].longitude),
+      infoWindow: InfoWindow(title: specify['businessName']),
+    );
+    setState(() {
+      markers[markerId] = marker;
+      //print(markerId);
+    });
   }
 
   Future<void> _goToCurrentPosition(LatLng latlng) async {
@@ -87,6 +125,16 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextField(
+              onTap: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage<Produto>(
+                    items: [],
+                    filter: (person) => [],
+                    builder: (person) => ListTile(),
+                  ),
+                );
+              },
               decoration: InputDecoration(
                   hintText: 'Procurar',
                   prefixIcon: Icon(Icons.search_outlined),
@@ -106,6 +154,7 @@ class _HomePageState extends State<HomePage> {
         child: GoogleMap(
           myLocationEnabled: true,
           mapType: MapType.normal,
+          markers: Set<Marker>.of(markers.values),
           zoomControlsEnabled: true,
           initialCameraPosition: _kGooglePlex,
           onMapCreated: (GoogleMapController controller) {

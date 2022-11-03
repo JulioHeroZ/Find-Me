@@ -65,6 +65,8 @@ dependencies:
   geocoding: ^2.0.5
 
   flutter_easyloading: 
+  geoflutterfire: ^3.0.3
+  search_page: ^2.2.0
 
 
   

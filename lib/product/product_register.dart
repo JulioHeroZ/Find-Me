@@ -65,7 +65,7 @@ class _ProductRegisterState extends State<ProductRegister> {
                 ),
                 Tab(
                   child: Text(
-                    'Imagens',
+                    'Sobre',
                     style: TextStyle(color: Colors.white),
                   ),
                 )
@@ -74,7 +74,7 @@ class _ProductRegisterState extends State<ProductRegister> {
             body: TabBarView(children: [
               ProductTab(),
               Center(
-                child: Text('Imagens'),
+                child: Text('Sobre'),
               )
             ]),
           ),
