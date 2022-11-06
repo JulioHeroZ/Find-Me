@@ -1,10 +1,15 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 
 import 'package:nubankproject/firebase_services.dart';
+import 'package:nubankproject/model/vendor_model.dart';
 import 'package:nubankproject/provider/product_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -16,29 +21,47 @@ class ProductTab extends StatefulWidget {
 }
 
 class _ProductTabState extends State<ProductTab> {
+  @override
+  void initState() {
+    _fetch();
+    super.initState();
+  }
+
+  _fetch() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null)
+      await FirebaseFirestore.instance
+          .collection('vendedor')
+          .doc(user.uid)
+          .get()
+          .then(((value) => location2 = value.data()!["location"]));
+  }
+
+  GeoPoint? location2;
   final FirebaseServices _services = FirebaseServices();
-  String? _productImageUrl;
-  final _productName = TextEditingController();
-  final _regularPrice = TextEditingController();
+  String? productImageUrl;
+  final productName = TextEditingController();
+  final regularPrice = TextEditingController();
 
   _saveToDB() {
     EasyLoading.show(status: 'Por favor aguarde...');
 
     _services
         .uploadImage(_productImage,
-            'produtos/${_services.user!.uid}/${_productName.text}')
+            'produtos/${_services.user!.uid}/${productName.text}')
         .then((String? url) {
       if (url != null) {
         setState(() {
-          _productImageUrl = url;
+          productImageUrl = url;
         });
       }
     }).then((((value) {
       _services.addProduct(data: {
-        'productImage': _productImageUrl,
-        'productName': _productName.text,
-        'regularPrice': _regularPrice.text,
+        'productImage': productImageUrl,
+        'productName': productName.text,
+        'regularPrice': regularPrice.text,
         'uid': _services.user!.uid,
+        'location': location2,
         'time': DateTime.now()
       }).then(((value) {
         EasyLoading.dismiss();
@@ -46,14 +69,11 @@ class _ProductTabState extends State<ProductTab> {
     })));
   }
 
-  final List<String> _categorias = [];
-  String? selectedCategory;
-
-  Widget _formField({
-    TextEditingController? controller,
-    String? label,
-    TextInputType? inputType,
-  }) {
+  Widget _formField(
+      {TextEditingController? controller,
+      String? label,
+      TextInputType? inputType,
+      void Function(String)? onChanged}) {
     return TextFormField(
       controller: controller,
       keyboardType: inputType,
@@ -65,6 +85,7 @@ class _ProductTabState extends State<ProductTab> {
           return label;
         }
       },
+      onChanged: onChanged,
     );
   }
 
@@ -79,6 +100,8 @@ class _ProductTabState extends State<ProductTab> {
 
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<ProductProvider>(context);
+
     return Consumer<ProductProvider>(builder: (context, provider, child) {
       return Padding(
         padding: const EdgeInsets.all(20.0),
@@ -133,19 +156,28 @@ class _ProductTabState extends State<ProductTab> {
                 ),
               ),
               _formField(
-                controller: _productName,
-                label: 'Nome do produto',
-                inputType: TextInputType.text,
-              ),
+                  controller: productName,
+                  label: 'Nome do produto',
+                  inputType: TextInputType.text,
+                  onChanged: (value) {
+                    provider.getFormData(
+                      productName: value,
+                    );
+                  }),
               _formField(
-                controller: _regularPrice,
-                label: 'Preço regular',
-                inputType: TextInputType.text,
-              )
+                  controller: regularPrice,
+                  label: 'Preço regular',
+                  inputType: TextInputType.number,
+                  onChanged: (value) {
+                    provider.getFormData(
+                      regularPrice: (value),
+                    );
+                  })
             ],
           ),
           ElevatedButton(
               onPressed: () {
+                print(_provider.productData!);
                 _saveToDB();
               },
               child: Text('Salvar'))

@@ -2,10 +2,13 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:flutter/widgets.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class FirebaseServices {
   User? user = FirebaseAuth.instance.currentUser;
+
   final CollectionReference vendedor =
       FirebaseFirestore.instance.collection('vendedor');
   final CollectionReference categorias =
@@ -36,9 +39,8 @@ class FirebaseServices {
 
   Future<void> addProduct({Map<String, dynamic>? data}) {
     return produtos
-        .doc()
-        .set(data)
-        .then((value) => print("Produto Adicionado"))
+        .add(data)
+        .then((value) => print('Produto Salvo'))
         .catchError((error) => print("Adicionar produto falhou: $error"));
   }
 }

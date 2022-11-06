@@ -7,21 +7,24 @@ class Produto {
     this.regularPrice,
     this.uid,
     this.time,
+    this.location,
   });
   Produto.fromJson(Map<String, Object?> json)
       : this(
           productImageUrl: json['productImageUrl']! as String,
           productName: json['productName']! as String,
-          regularPrice: json['regularPrice']! as String,
+          regularPrice: json['regularPrice']! as double,
           uid: json['uid'] as String,
           time: json['time'] as Timestamp,
+          location: json['location'] as GeoPoint,
         );
 
   final String? productImageUrl;
   final String? productName;
-  final String? regularPrice;
+  final double? regularPrice;
   final String? uid;
   final Timestamp? time;
+  final GeoPoint? location;
 
   Map<String, Object?> toJson() {
     return {
@@ -29,7 +32,8 @@ class Produto {
       'productName': productName,
       'regularPrice': regularPrice,
       'uid': uid,
-      'time': time
+      'time': time,
+      'location': location,
     };
   }
 }

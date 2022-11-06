@@ -232,6 +232,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.3.9"
+  firebase_ui_firestore:
+    dependency: "direct main"
+    description:
+      name: firebase_ui_firestore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0-dev.0"
+  firebase_ui_localizations:
+    dependency: transitive
+    description:
+      name: firebase_ui_localizations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   fl_chart:
     dependency: "direct main"
     description:
@@ -279,6 +293,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_material_color_picker:
     dependency: transitive
     description:

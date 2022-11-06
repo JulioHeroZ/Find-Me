@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -10,16 +11,19 @@ import 'package:nubankproject/model/product_model.dart';
 import 'package:nubankproject/model/vendor_model.dart';
 import 'package:search_page/search_page.dart';
 
+import '../data_search/data_search.dart';
+
 @override
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, this.snapshot}) : super(key: key);
+  final FirestoreQueryBuilderSnapshot? snapshot;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Produto> _productList = [];
+  List productList = [];
 
   final FirebaseServices _services = FirebaseServices();
   late GoogleMapController mapController;
@@ -40,17 +44,42 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    getProductList();
     _getUserLocation();
     getMarkerData();
     super.initState();
   }
 
-  String uid = FirebaseAuth.instance.currentUser!.uid;
+  getProductList() async {
+    QuerySnapshot qn = await _services.produtos.get();
+    setState(() {
+      for (int i = 0; i < qn.docs.length; i++) {
+        productList.add({
+          "productImage": qn.docs[i]["productImage"],
+          "productName": qn.docs[i]["productName"],
+          "regularPrice": qn.docs[i]["regularPrice"],
+          "uid": qn.docs[i]["uid"],
+        });
+      }
+    });
+    // return widget.snapshot?.docs.forEach((element) {
+    //   Produto produto = element.data();
+    //   setState(() {
+    //     _productList.add(Produto(
+    //       productName: produto.productName,
+    //       regularPrice: produto.regularPrice,
+    //     ));
+    //   });
+    // });
+    return qn.docs;
+  }
+
+  // String uid = FirebaseAuth.instance.currentUser!.uid;
   getMarkerData() {
     _services.vendedor.get().then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
+      for (var doc in querySnapshot.docs) {
         initMarker(doc.data(), doc.id);
-      });
+      }
     });
   }
 
@@ -128,11 +157,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 showSearch(
                   context: context,
-                  delegate: SearchPage<Produto>(
-                    items: [],
-                    filter: (person) => [],
-                    builder: (person) => ListTile(),
-                  ),
+                  delegate: DataSearch(),
                 );
               },
               decoration: InputDecoration(
